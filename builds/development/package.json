@@ -1,0 +1,19 @@
+{
+  "name": "Sqlblocks",
+  "version": "0.1.0",
+  "description": "Sqlblocks application built with Electron",
+  "author": {
+    "name": "Martin Shaw",
+    "email": ""
+  },
+  "license": "MIT",
+  "main": "javascripts/main/index.js",
+  "dependencies": {},
+  "settings": {
+    "width": 1200,
+    "height": 700,
+    "reload": true,
+    "devTools": true,
+    "icon": ".png"
+  }
+}

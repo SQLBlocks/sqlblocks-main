@@ -1,6 +1,6 @@
 # Sqlblocks
 
-> My Sqlblocks app built with Electron
+> Scratch-like visual database client for learners, built on web technologies
 
 
 ## Dev

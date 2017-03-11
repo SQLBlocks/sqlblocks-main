@@ -16,10 +16,12 @@
   },
   "build": {
     "appId": "com.electron.sqlblocks",
-    "win": {
-    },
+    "win": {},
     "mac": {
       "category": "your.app.category.type"
     }
+  },
+  "dependencies": {
+    "node-blockly": "^1.0.16"
   }
 }
