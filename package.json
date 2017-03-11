@@ -4,7 +4,8 @@
   "description": "Scratch-like visual database client for learners, built on web technologies",
   "repository": "",
   "scripts": {
-    "postinstall": "install-app-deps"
+    "postinstall": "install-app-deps",
+    "dev": "boson start"
   },
   "devDependencies": {
     "electron-builder": "15.2.0",
