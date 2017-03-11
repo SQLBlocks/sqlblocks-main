@@ -1,0 +1,20 @@
+{
+  "name": "sqlblocks",
+  "version": "0.0.1",
+  "description": "Scratch-like visual database client for learners",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^3.5.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "watch": "echo d",
+    "dev": "echo d",
+    "prod": "echo e"
+  },
+  "author": "Martin Shaw",
+  "license": "ISC"
+}
