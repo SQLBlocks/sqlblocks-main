@@ -46,7 +46,7 @@
 
 	__webpack_require__(1).ipcRenderer.on('loaded' , function(event, data) {
 
-		alert();
+		// alert();
 	});
 
 
