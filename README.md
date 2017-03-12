@@ -27,3 +27,4 @@ Builds the app for OS X, Linux, and Windows, using [electron-builder](https://gi
 ## License
 
 The MIT License (MIT) © Martin Shaw 2017
+ads
