@@ -3,10 +3,12 @@
 > Scratch-like visual database client for learners, built on web technologies
 
 
-## Dev
+## Development Install
 
 ```
-$ npm install
+$ sudo npm install
+$ sudo npm i bozon
+$ sudo apt-get install libgconf-2-4
 ```
 
 ### Run
