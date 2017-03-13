@@ -34,225 +34,24 @@
 
 		<button onclick="alertCode();">Alert</button>
 		<button onclick="runCode();">Run</button>
+		<button onclick="parseSqlCode();">Parse SQL Code</button>
 
 		<script>
-			var Blockly = require('node-blockly/browser');
 			
-
-
-
 			var DB = {}
-			DB.CONNECT = function(){
-				alert("Connected to DB");
-			}
+			
+			var Blockly = require('node-blockly/browser');
 
+			require('./javascripts/main/database_drivers/dummy')(DB);
 
- //====================================================
- //====================================================
-
-
-
-
-
-			Blockly.Blocks['string_length'] = {
-				init: function() {
-					this.jsonInit({
-						"message0": 'length of %1',
-						"args0": [
-							{
-								"type": "input_value",
-								"name": "VALUE",
-								"check": "String"
-							}
-						],
-						"output": "Number",
-						"colour": 160,
-						"tooltip": "Returns number of letters in the provided text.",
-						"helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp"
-					});
-				}
-			};
-			Blockly.JavaScript['string_length'] = function(block) {
-				// String or array length.
-				var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-				return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
-			};
-
-// ---------------------------------------
-
-			Blockly.Blocks['db_connection'] = {
-				init: function() {
-					this.jsonInit({
-						"message0": 'start connection',
-						"args0": [
-						],
-						"nextStatement": "Action",
-						"colour": 70,
-						"tooltip": "Initiate connection to DB with presetted credentials"
-					});
-				}
-			};
-			Blockly.JavaScript['db_connection'] = function(block) {
-				return ["DB.CONNECT();", Blockly.JavaScript.ORDER_MEMBER];
-			};
-
-// ---------------------------------------
-
-			Blockly.Blocks['db_select'] = {
-				init: function() {
-					this.jsonInit({
-						"message0": 'select %1 from %2 where %3',
-						"args0": [
-							{
-								"type": "input_value",
-								"name": "COLUMN",
-								"check": "String"
-							},
-							{
-								"type": "input_value",
-								"name": "FROM",
-								"check": "String"
-							},
-							{
-								"type": "input_value",
-								"name": "WHERE",
-								"check": "String"
-							}
-						],
-						"previousStatement": "Action",
-						"nextStatement": "Action",
-						"colour": 70,
-						"tooltip": "Select a list of records from the DB"
-					});
-				}
-			};
-			Blockly.JavaScript['db_select'] = function(block) {
-				var argument0 = Blockly.JavaScript.valueToCode(block, 'COLUMN',Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-				var argument1 = Blockly.JavaScript.valueToCode(block, 'FROM',Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-				var argument2 = Blockly.JavaScript.valueToCode(block, 'WHERE',Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-				return ["DB.SELECT("+argument0+","+argument1+","+argument2+");", Blockly.JavaScript.ORDER_MEMBER];
-			};
-
-// ---------------------------------------
-
-			Blockly.Blocks['db_column'] = {
-				init: function() {
-					this.jsonInit({
-						"message0": 'column %1',
-						"args0": [
-							{
-								"type": "input_value",
-								"name": "COLUMN_NAME",
-								"check": "String"
-							}
-						],
-						"output": "String",
-						"colour": 70,
-						"tooltip": "Indicate a column from the DB"
-					});
-				}
-			};
-			Blockly.JavaScript['db_column'] = function(block) {
-				var argument0 = Blockly.JavaScript.valueToCode(block, 'COLUMN_NAME',Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-				return ["DB.COLUMN_IDENT("+argument0+");", Blockly.JavaScript.ORDER_MEMBER];
-			};
-
-// ---------------------------------------
-
-			Blockly.Blocks['db_table'] = {
-				init: function() {
-					this.jsonInit({
-						"message0": 'table %1',
-						"args0": [
-							{
-								"type": "input_value",
-								"name": "TABLE_NAME",
-								"check": "String"
-							}
-						],
-						"output": "String",
-						"colour": 70,
-						"tooltip": "Locate a table from the DB"
-					});
-				}
-			};
-			Blockly.JavaScript['db_table'] = function(block) {
-				var argument0 = Blockly.JavaScript.valueToCode(block, 'TABLE_NAME',Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-				return ["DB.TABLE_IDENT("+argument0+");", Blockly.JavaScript.ORDER_MEMBER];
-			};
-
-// ---------------------------------------
-
-			Blockly.Blocks['db_condition'] = {
-				init: function() {
-					this.jsonInit({
-						"message0": 'comparison %1 %2 %3',
-						"args0": [
-							{
-								"type": "input_value",
-								"name": "SUBJECT",
-								"check": "String"
-							},
-							{
-								"type": "field_dropdown",
-								"name": "OPERATOR",
-								"check": "String",
-								"options": [
-									[ "=", "DB.OPERATOR.EQUALS" ],
-									[ "!=", "DB.OPERATOR.NOT_EQUALS" ],
-									[ ">", "DB.OPERATOR.GREATER_THAN" ],
-									[ "<", "DB.OPERATOR.LESS_THAN" ],
-									[ ">=", "DB.OPERATOR.GREATER_THAN_OR_EQUALS" ],
-									[ "<=", "DB.OPERATOR.LESS_THAN_OR_EQUALS" ],
-									[ "BETWEEN", "DB.OPERATOR.BETWEEN" ],
-									[ "LIKE", "DB.OPERATOR.LIKE" ]
-								]
-							},
-							{
-								"type": "input_value",
-								"name": "COMPARATOR",
-								"check": "String"
-							}
-						],
-						"output": "String",
-						"colour": 70,
-						"tooltip": "Limit selection using a logical comparison"
-					});
-				}
-			};
-			Blockly.JavaScript['db_condition'] = function(block) {
-				var argument0 = Blockly.JavaScript.valueToCode(block, 'SUBJECT',Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-				var argument0 = Blockly.JavaScript.valueToCode(block, 'OPERATOR',Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-				var argument0 = Blockly.JavaScript.valueToCode(block, 'COMPARATOR',Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-				return ["DB.WHERE_COMPARATOR("+argument0+"+"+argument1+"+"+argument2+");", Blockly.JavaScript.ORDER_MEMBER];
-			};
-
-// ---------------------------------------
-
-			Blockly.Blocks['db_column_wildcard_all'] = {
-				init: function() {
-					this.jsonInit({
-						"message0": '*',
-						"output": "String",
-						"colour": 70,
-						"tooltip": "Locate a table from the DB"
-					});
-				}
-			};
-			Blockly.JavaScript['db_table'] = function(block) {
-				return ["DB.WILDCARD.ALL", Blockly.JavaScript.ORDER_MEMBER];
-			};
-
-
-
-
-
- //====================================================
- //====================================================
- 
-
-
-
+			require('./javascripts/main/blockly_defs/string_length')(Blockly);
+			require('./javascripts/main/blockly_defs/db_connection')(Blockly);
+			require('./javascripts/main/blockly_defs/db_select')(Blockly);
+			require('./javascripts/main/blockly_defs/db_column')(Blockly);
+			require('./javascripts/main/blockly_defs/db_column_wildcard_all')(Blockly);
+			require('./javascripts/main/blockly_defs/db_condition')(Blockly);
+			require('./javascripts/main/blockly_defs/db_select')(Blockly);
+			require('./javascripts/main/blockly_defs/db_table')(Blockly);
 
 			var workspace = Blockly.inject('blocklyDiv', 
 				{
@@ -274,6 +73,11 @@
 			var runCode = function(){
 				var code = Blockly.JavaScript.workspaceToCode(workspace);
 				eval(code);
+			}
+			var parseSqlCode = function(){
+				var code = Blockly.JavaScript.workspaceToCode(workspace);
+				eval("var _sql = "+code);
+				alert(_sql);
 			}
 		</script>
 

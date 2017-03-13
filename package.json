@@ -5,7 +5,8 @@
   "repository": "",
   "scripts": {
     "postinstall": "install-app-deps",
-    "dev": "boson start"
+    "dev": "bozon start",
+    "release": "bozon package linux"
   },
   "devDependencies": {
     "electron-builder": "15.2.0",
